@@ -6,7 +6,18 @@ const taskCategorySelect = document.getElementById("task-category");
 const taskList = document.getElementById("task-list");
 const searchInput = document.getElementById("search-input");
 
-let tasks = [...initialTasks];
+const STORAGE_KEY = "tasks";
+
+function loadTasks() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  return saved ? JSON.parse(saved) : [...initialTasks];
+}
+
+function saveTasks() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+}
+
+let tasks = loadTasks();
 let searchTerm = "";
 
 function renderTasks() {
@@ -65,6 +76,7 @@ function addTask(title, category) {
   };
 
   tasks.unshift(newTask);
+  saveTasks();
   renderTasks();
 }
 
@@ -75,11 +87,13 @@ function toggleTask(taskId) {
       : task
   );
 
+  saveTasks();
   renderTasks();
 }
 
 function deleteTask(taskId) {
   tasks = tasks.filter((task) => task.id !== taskId);
+  saveTasks();
   renderTasks();
 }
 
