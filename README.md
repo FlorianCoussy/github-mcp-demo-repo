@@ -10,7 +10,14 @@ This repository is designed as a demo project for showcasing real GitHub MCP wor
 - Search tasks
 - Mark tasks as complete
 - Delete tasks
+- Persistent storage via localStorage
 - Small and beginner friendly codebase
+
+## Data Persistence
+
+Tasks are automatically saved to `localStorage` under the key `tasks`. Changes (add, toggle, delete) are persisted immediately and survive page reloads.
+
+On first load, if no saved data is found, a set of seeded tasks from `src/data.js` is used as the default state.
 
 ## Tech Stack
 
